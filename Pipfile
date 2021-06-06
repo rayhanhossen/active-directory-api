@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "3.2.4"
+python-decouple = "3.4"
+djangorestframework = "3.12.4"
+ldap3 = "2.9"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
