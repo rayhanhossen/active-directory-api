@@ -24,6 +24,7 @@ class UserProvision(APIView):
                     response = SuccessResponse(f"Provisioning of employee ({user_principle}) was successful!")
                     return Response(response.to_json(), status=status.HTTP_201_CREATED)
                 else:
+                    employee.delete()
                     response = ErrorResponse(
                         f"AD operation could not be performed. Error description: {ad_response['description']}")
                     return Response(response.to_json(), status=status.HTTP_400_BAD_REQUEST)
