@@ -12,6 +12,7 @@ class ADUser(models.Model):
     designation = models.CharField(max_length=255)
     job_title = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255)
+    user_account_control = models.IntegerField(default=546, null=True, blank=True)
     office = models.CharField(max_length=255)
     address1 = models.CharField(max_length=255)
     address2 = models.CharField(max_length=255)

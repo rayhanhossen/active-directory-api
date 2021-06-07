@@ -42,17 +42,18 @@ class UserManager:
         }
         if employee.manager:
             attribute['manager'] = f'CN={employee.manager},{employee.parent_OU}'
-
         self.connect.add(current_user, attributes=attribute)
         ad_response = self.connect.result
+        print(f'ADD User Response- {ad_response}')
         # add password for user
         self.generate_ad_password(current_user)
 
         return user_principle, ad_response
 
-    def disable_user(self, common_name, parent_ou):
-        self.connect.modify('cn=' + common_name + ',' + parent_ou, {'userAccountControl': [('MODIFY_REPLACE', 2)]})
+    def disable_user(self, ad_users):
+        self.connect.modify('cn=' + ad_users.SAM_account_name + ',' + ad_users.parent_OU, {'userAccountControl': [('MODIFY_REPLACE', 2)]})
         ad_response = self.connect.result
+        print(f'Disable User Response- {ad_response}')
         return ad_response
 
     def add_user_in_group(self):
@@ -63,3 +64,4 @@ class UserManager:
         random_password = get_random_password(10)
         # set user password
         self.connect.extend.microsoft.modify_password(user_dn, random_password)
+        print(f'ADD Password Response- {self.connect.result}')
